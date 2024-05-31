@@ -16,9 +16,9 @@ public class JPerspective {
         SimpleMatrix projMatrix = GenerateProjectionMatrix(aspectRatio, fov, nearZ, farZ);
 
         SimpleMatrix matrixPt = new SimpleMatrix(new double[][]{
-                {pt.x * 10, 0, 0, 0},
-                {pt.y * 10, 0, 0, 0},
-                {pt.z * 10, 0, 0, 0},
+                {pt.x, 0, 0, 0},
+                {pt.y, 0, 0, 0},
+                {pt.z, 0, 0, 0},
                 {pt.w, 0, 0, 0}
         });
 
@@ -34,9 +34,9 @@ public class JPerspective {
         SimpleMatrix projMatrix = GenerateProjectionMatrix(aspectRatio, fov, nearZ, farZ);
 
         SimpleMatrix matrixPt = new SimpleMatrix(new double[][]{
-                {pt.x * 10, 0, 0, 0},
-                {pt.y * 10, 0, 0, 0},
-                {pt.z * 10, 0, 0, 0},
+                {pt.x, 0, 0, 0},
+                {pt.y, 0, 0, 0},
+                {pt.z, 0, 0, 0},
                 {pt.w, 0, 0, 0}
         });
 

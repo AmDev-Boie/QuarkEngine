@@ -52,7 +52,7 @@ public class Init implements QuarkEngine {
                         movingUp = true;
                     }
                 },
-                KeyStroke.getKeyStroke("E")
+                KeyStroke.getKeyStroke("pressed E")
         ));
         ProgramRuntimeManager.Inputs.add(new InputMethod(
                 new AbstractAction() {
@@ -212,6 +212,6 @@ public class Init implements QuarkEngine {
         // GameManager.setCameraRoT(GameManager.getCameraRot().multiply(AngleChange));
 
         // Object behavior stuff.
-        obj1.setRot(new Degree3D(((System.currentTimeMillis() * 0.001) * 360 * rotPerSecond), ((System.currentTimeMillis() * 0.001) * 360 * rotPerSecond), 0).toQuaternion());
+        // obj1.setRot(new Degree3D(((System.currentTimeMillis() * 0.001) * 360 * rotPerSecond), ((System.currentTimeMillis() * 0.001) * 360 * rotPerSecond), 0).toQuaternion());
     }
 }
