@@ -29,7 +29,7 @@ public class ProgramRuntimeManager {
 
     public static double GraphicsDeltaTime;
     public static double StateDeltaTime;
-    public static void StartGameLoop() {
+    public static void StartGameLoop(Boolean ThreeD) {
         //---------------------------------------------------------------//
         //  Initial Function
         //---------------------------------------------------------------//
@@ -139,7 +139,7 @@ public class ProgramRuntimeManager {
                     GraphicsDeltaTime = (double) ((time - last_time)*0.000000001);
                     last_time = time;
 
-                    DrawManager.DrawWindows();
+                    DrawManager.DrawWindows(ThreeD);
                     /*if ( ((1.0/GFPSCap) - ((time - last_time)*0.0000001)) < 0) {
                         try {
                             Thread.sleep((long) ((1.0/GFPSCap) - ((time - last_time)*0.0000001)));
