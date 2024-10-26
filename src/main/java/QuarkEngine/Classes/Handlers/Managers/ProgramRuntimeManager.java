@@ -16,7 +16,8 @@ import java.util.Vector;
 public class ProgramRuntimeManager {
     public static volatile boolean running = true;
     public static long last_time = System.nanoTime();
-    public static int FPSCap = 144;
+    public static long last_high_update = System.nanoTime();
+    public static int FPSCap = 255;
 
     public static Vector<InputMethod> Inputs = new Vector<InputMethod>();
     public static GameWindow[] windows;
@@ -29,7 +30,7 @@ public class ProgramRuntimeManager {
 
     public static double GraphicsDeltaTime;
     public static double StateDeltaTime;
-    public static void StartGameLoop(Boolean ThreeD) {
+    public static void StartGameLoop() {
         //---------------------------------------------------------------//
         //  Initial Function
         //---------------------------------------------------------------//
@@ -80,9 +81,13 @@ public class ProgramRuntimeManager {
                         Thread.sleep(1000); // longer than one frame
                     }
                     catch (InterruptedException ignored){}
-                    FPSCount = Math.round(1000000000.0/(System.nanoTime() - lastTime)); //one second(nano) divided by amount of time it takes for one frame to finish
-                    if(FPSHigh < FPSCount) {
+                    FPSCount = Math.round(1000000000d/(System.nanoTime() - lastTime)); //one second(nano) divided by amount of time it takes for one frame to finish
+                    if(FPSHigh < FPSCount ) {
                         FPSHigh = FPSCount;
+                    }
+                    if(last_high_update + 1000000000d <= System.nanoTime()) {
+                        FPSHigh = FPSCount;
+                        last_high_update = System.nanoTime();
                     }
                     lastTime = System.nanoTime();
                 }
@@ -139,7 +144,7 @@ public class ProgramRuntimeManager {
                     GraphicsDeltaTime = (double) ((time - last_time)*0.000000001);
                     last_time = time;
 
-                    DrawManager.DrawWindows(ThreeD);
+                    DrawManager.DrawWindows();
                     /*if ( ((1.0/GFPSCap) - ((time - last_time)*0.0000001)) < 0) {
                         try {
                             Thread.sleep((long) ((1.0/GFPSCap) - ((time - last_time)*0.0000001)));

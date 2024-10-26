@@ -1,6 +1,5 @@
 package QuarkEngine.Classes.Handlers.Managers;
 
-import QuarkEngine.Classes.types.JGameObjects.PhysicalObject2D;
 import QuarkEngine.Classes.types.JMath.Degree3D;
 import QuarkEngine.Classes.types.JMath.Quaternion;
 import QuarkEngine.Classes.types.JMath.Vector3D;
@@ -14,7 +13,6 @@ public class GameManager {
     protected static Quaternion cameraRot = new Degree3D(0,0,0).toQuaternion();
 
     protected static List<PhysicalObject> physicalObjects = new ArrayList<PhysicalObject>();
-    protected static List<PhysicalObject2D> physicalObjects2D = new ArrayList<PhysicalObject2D>();
     public static final GameManager StaticInstance = new GameManager();
 
     public GameManager() {
@@ -27,14 +25,6 @@ public class GameManager {
 
     public synchronized void WriteObjectList(List<PhysicalObject> list) {
         physicalObjects = list;
-    }
-
-    public synchronized List<PhysicalObject2D> ReadObjectList2D() {
-        return physicalObjects2D;
-    }
-
-    public synchronized void WriteObjectList2D(List<PhysicalObject2D> list) {
-        physicalObjects2D = list;
     }
 
     public static Vector3D getCameraPos() {
