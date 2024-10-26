@@ -2,10 +2,6 @@ package QuarkEngine.Classes.Handlers.Printing;
 
 import QuarkEngine.Classes.Handlers.JIO.FileIO;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 public class QuarkPrinter {
     private static final String ANSI_CLEAR = "\033[0m";
     private static final String ANSI_ENGINE_COLOR = "\033[56m";
@@ -26,26 +22,14 @@ public class QuarkPrinter {
     }
 
     public static void LogEngineMsg(String Msg) {
-        try {
-            Files.writeString(Path.of("./OutputLog.txt"), " [Quark Engine]: " + "|  Log  | " + '"' + Msg + "\"\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileIO.AppendFile("OutputLog.txt", " [Quark Engine]: " + "|  Log  | " + Msg);
     }
 
     public static void LogEngineWarn(String Msg) {
-        try {
-            Files.writeString(Path.of("./OutputLog.txt"), " [Quark Engine]: " + "|Warning| " + '"' + Msg + "\"\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileIO.AppendFile("OutputLog.txt", " [Quark Engine]: " + "|Warning| " + Msg);
     }
 
     public static void LogEngineErr(String Msg) {
-        try {
-            Files.writeString(Path.of("./OutputLog.txt"), " [Quark Engine]: " + "| Error | " + '"' + Msg + "\"\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileIO.AppendFile("OutputLog.txt", " [Quark Engine]: " + "| Error | " + Msg);
     }
 }

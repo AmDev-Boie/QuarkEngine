@@ -1,9 +1,5 @@
 package QuarkEngine;
 
-import QuarkEngine.Classes.types.Utils.GraphicsUtils;
-
-import java.awt.*;
-
 public interface QuarkEngine {
     /**
      * The PreLoad() Method is the first method ran after the Start() method.

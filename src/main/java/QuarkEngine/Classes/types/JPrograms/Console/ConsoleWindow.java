@@ -10,7 +10,7 @@ public class ConsoleWindow extends ProgramWindow {
     public static List Consoles = new List();
     private ProgramWindow thisConsole;
     public ConsoleWindow() {
-        super(new Dimension(400, 300));
+        super(new Dimension(800, 600));
         setTitle("Java Console");
         thisConsole = this;
     }

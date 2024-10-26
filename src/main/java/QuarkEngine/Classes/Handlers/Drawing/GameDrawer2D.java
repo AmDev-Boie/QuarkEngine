@@ -1,12 +1,9 @@
 package QuarkEngine.Classes.Handlers.Drawing;
 
-import Game.Advanced;
-import Game.Init;
 import QuarkEngine.Classes.Handlers.JGeometryHandlers.JPerspective;
 import QuarkEngine.Classes.Handlers.JMath.VectorOperation;
 import QuarkEngine.Classes.Handlers.Managers.GameManager;
 import QuarkEngine.Classes.Handlers.Managers.ProgramRuntimeManager;
-import QuarkEngine.Classes.types.GUI.GUIComp;
 import QuarkEngine.Classes.types.JGameObjects.PhysicalObject;
 import QuarkEngine.Classes.types.JGameObjects.PhysicalObject2D;
 import QuarkEngine.Classes.types.JGeometry.Face3D;
@@ -14,7 +11,6 @@ import QuarkEngine.Classes.types.JGeometry.Shape3D;
 import QuarkEngine.Classes.types.JMath.HmgVector3D;
 import QuarkEngine.Classes.types.JMath.Vector3D;
 import QuarkEngine.Classes.types.JPrograms.Game.GameWindow;
-import QuarkEngine.Classes.types.Utils.GraphicsUtils;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -31,7 +27,6 @@ public class GameDrawer2D implements Function{
 
     public static boolean renderUI = true;
     public static boolean renderDebug = true;
-    public static boolean renderGUI = true;
 
     // Optimization Variables
 
@@ -40,9 +35,9 @@ public class GameDrawer2D implements Function{
     private static BufferedImage newImg;
     private static BufferedImage dataImg;
     private static Graphics2D imgGraphics;
+    private static Graphics2D dataImgGraphics;
 
     // Custom ImageDrawing Method (GPT ahh code because I couldn't find good docs on the raster class :sob:)
-    // [edit after that comment]: CHANGED THE CODE BECAUSE GPT HAD A BILLION DIVISIONS IN THE LOOP, THEN DIDNT EVEN BOTHER USE FLOATS. WTF CHAT-GPT.
     public static void DrawRectCustom(BufferedImage sourceImage, Dimension location, Dimension size) {
         if (newImg == null) {
             throw new IllegalStateException("Static image has not been initialized.");
@@ -55,28 +50,21 @@ public class GameDrawer2D implements Function{
         WritableRaster staticRaster = newImg.getRaster();
 
         // Calculate scaling factors for resizing
-        float scaleX = 1f/((float) size.width / sourceImage.getWidth());
-        float scaleY = 1f/((float) size.height / sourceImage.getHeight());
+        double scaleX = (double) size.width / sourceImage.getWidth();
+        double scaleY = (double) size.height / sourceImage.getHeight();
 
         // Iterate over the destination area in the static image
         for (int y = 0; y < size.height; y++) {
             for (int x = 0; x < size.width; x++) {
-                // Calculate corresponding source coordinates, with bounds checking
-                int srcX = (int) (x * scaleX);
-                int srcY = (int) (y * scaleY);
+                // Calculate corresponding source coordinates
+                int srcX = (int) (x / scaleX);
+                int srcY = (int) (y / scaleY);
 
-                // Check bounds to avoid ArrayIndexOutOfBoundsException
-                if (srcX >= 0 && srcX < sourceImage.getWidth() && srcY >= 0 && srcY < sourceImage.getHeight()) {
-                    // Get pixel data from the source image
-                    int[] pixel = sourceRaster.getPixel(srcX, srcY, (int[]) null);
+                // Get pixel data from the source image
+                int[] pixel = sourceRaster.getPixel(srcX, srcY, (int[]) null);
 
-                    // Set pixel data to the static image at the specified location, with bounds checking
-                    int destX = location.width + x;
-                    int destY = location.height + y;
-                    if (destX >= 0 && destX < newImg.getWidth() && destY >= 0 && destY < newImg.getHeight()) {
-                        staticRaster.setPixel(destX, destY, pixel);
-                    }
-                }
+                // Set pixel data to the static image at the specified location
+                staticRaster.setPixel(location.width + x, location.height + y, pixel);
             }
         }
 
@@ -93,10 +81,8 @@ public class GameDrawer2D implements Function{
             newImg = new BufferedImage(WindowSize.width, WindowSize.height, BufferedImage.TYPE_INT_RGB);
             dataImg = new BufferedImage(WindowSize.width, WindowSize.height, BufferedImage.TYPE_INT_RGB);
             imgGraphics = newImg.createGraphics();
+            dataImgGraphics = dataImg.createGraphics();
         }
-
-        // Camera state stuff
-        Vector3D CameraPos = GameManager.getCameraPos();
 
         // ------------------------------------------------------------------------------------------------- //
         //  Sprites
@@ -109,28 +95,11 @@ public class GameDrawer2D implements Function{
                 Vector3D ObjPos = obj.getPos();
                 Vector3D ObjSize = obj.getSize();
 
-                int offsetX = (int) ( ( (ObjPos.x - (ObjSize.x*0.5) )*10) + (WindowSize.width*0.5) );
-                int offsetY = (int) ( ( (ObjPos.y - (ObjSize.y*0.5) )*10) + (WindowSize.height*0.5) );
-
                 Dimension Size = new Dimension((int) (ObjSize.x*10),(int) (ObjSize.y*10));
-                Dimension location = new Dimension(offsetX, offsetY);
+                Dimension location = new Dimension((int) (ObjPos.x - (Size.width * 0.5)), (int) (ObjPos.y + (Size.height * 0.5)));
 
                 DrawRectCustom(Sprite, location, Size);
             }
-        }
-
-        // ------------------------------------------------------------------------------------------------- //
-        //  GUI
-        // ------------------------------------------------------------------------------------------------- //
-
-        if (renderGUI) {
-            // Draw UI Comps.
-            for (GUIComp comp : GameManager.StaticInstance.ReadGUIComps()) {
-                comp.DrawComp(WindowSize, imgGraphics); // silly thing to make this A LOT easier on myself.
-            }
-
-            // Draw special UI after all 'component' GUI has been drawn.
-            new Advanced().OnGUICall(new GraphicsUtils(imgGraphics));
         }
 
         // ------------------------------------------------------------------------------------------------- //

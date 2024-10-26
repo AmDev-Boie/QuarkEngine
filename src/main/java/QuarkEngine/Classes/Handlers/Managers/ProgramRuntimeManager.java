@@ -10,9 +10,6 @@ import QuarkEngine.Classes.types.JPrograms.ProgramWindow;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -37,19 +34,12 @@ public class ProgramRuntimeManager {
         //  Initial Function
         //---------------------------------------------------------------//
 
-        FileIO.InstanceFile("./OutputLog.txt");
-        try {
-            Path path = Path.of("./OutputLog.txt");
-            Files.writeString(path, "--------------------------------------\n");
-            Files.writeString(path, "  Quark Engine Initiation Log\n");
-            Files.writeString(path, "--------------------------------------\n\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        QuarkPrinter.PrintEngineMsg("--------------------------------------");
+        QuarkPrinter.PrintEngineMsg(" Quark Engine Initiation Log;");
+        QuarkPrinter.PrintEngineMsg("--------------------------------------\n");
 
-        System.out.println("--------------------------------------");
-        System.out.println("  Quark Engine Initiation Log");
-        System.out.println("--------------------------------------\n");
+        QuarkPrinter.PrintEngineMsg("Cleaning up OutputLog.txt...\n");
+        FileIO.InstanceFile("./OutputLog.txt");
 
         QuarkPrinter.PrintEngineMsg("Invoking 'PreLoad();' Method...\n");
         new Init().PreLoad();

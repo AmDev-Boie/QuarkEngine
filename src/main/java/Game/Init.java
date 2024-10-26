@@ -3,7 +3,6 @@ package Game;
 import QuarkEngine.Classes.Handlers.Loading.ResourceLoader;
 import QuarkEngine.Classes.Handlers.Managers.GameManager;
 import QuarkEngine.Classes.Handlers.Managers.ProgramRuntimeManager;
-import QuarkEngine.Classes.Handlers.Printing.QuarkPrinter;
 import QuarkEngine.Classes.types.JGameObjects.PhysicalObject;
 import QuarkEngine.Classes.types.JGameObjects.PhysicalObject2D;
 import QuarkEngine.Classes.types.JMath.Degree3D;
@@ -12,7 +11,6 @@ import QuarkEngine.Classes.types.JMath.Vector3D;
 import QuarkEngine.Classes.types.JPrograms.Console.ConsoleWindow;
 import QuarkEngine.Classes.types.JPrograms.Game.GameWindow;
 import QuarkEngine.Classes.types.JPrograms.InputMethod;
-import QuarkEngine.Classes.types.Utils.GraphicsUtils;
 import QuarkEngine.QuarkEngine;
 
 import javax.imageio.ImageIO;
@@ -70,8 +68,6 @@ public class Init implements QuarkEngine {
         StartupInit();
 
         obj = new PhysicalObject2D(ResourceLoader.TextureArray[0]);
-        obj.setPos(new Vector3D(0,0,0));
-        obj.setSize(new Vector3D(5,5,0));
     }
 
     // This Method is the function the game will use to update on an Update Frame. so it's pretty much your main thread of game logic.

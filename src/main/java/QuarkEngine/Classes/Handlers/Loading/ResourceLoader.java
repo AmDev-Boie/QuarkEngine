@@ -19,7 +19,7 @@ public class ResourceLoader {
 
     public static void loadTexturesToMemory() {
         try {
-            TextureArray[0] = ImageIO.read(new File("./src/main/resources/images/MissingTexture.png"));
+            TextureArray[0] = ImageIO.read(ResourceLoader.class.getResource("./src/main/resources/Textures/MissingTexture.png"));
         } catch (IOException e) {
             System.out.println(new RuntimeException(e).getMessage());
         }
