@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/QuarkEngine.iml" filepath="$PROJECT_DIR$/.idea/QuarkEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javerSpaceBalls.iml" filepath="$PROJECT_DIR$/javerSpaceBalls.iml" />
     </modules>
   </component>
 </project>
