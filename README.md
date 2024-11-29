@@ -1,6 +1,7 @@
 # **Quark Engine**
 
 Quark engine in short is a java based framework ment to solve problems in the ways mods are handled in games.
+**also an attempt to a decent solution to 'game engines' as a whole.**
 
 [!!!] QUARK ENGINE IS CURRENTLY GOING UNDER A COMPLETE REWRITE [!!!]
 
