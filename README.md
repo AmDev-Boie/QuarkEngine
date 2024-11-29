@@ -1,6 +1,13 @@
 # **Quark Engine**
 
-Quark engine is a java framework primarially used for game development, what makes this framework special is that its purely open source and written with the intention of modification. so (mostly) anybody who can understand java can contribute or modify the engine easily to implement features that i couldnt or havent gotten to, or maybe things that your specific game needs thats nowhere else. all while keeping basic tools for the 99.9% of other games to use, so ideally you shouldnt even need to touch the engine code in the first place.
+Quark engine in short is a java based framework ment to solve problems in the ways mods are handled in games.
+
+[!!!] QUARK ENGINE IS CURRENTLY GOING UNDER A COMPLETE REWRITE [!!!]
+
+i became aware of aparapi api, and i am going to try and implement it into the framework, however with the way the entire game engine side was structured it requires a ground up rewrite to work.
+the engine will become more optimal as i go over the old features and implement hardware acceleration and try to make better use of multithreaded behaviors.
+
+and obc everything below probably wont last for too long
 
 ## Feature list:
 - 2D & 3D Functionality
