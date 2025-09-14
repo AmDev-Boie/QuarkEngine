@@ -1,0 +1,9 @@
+[modules]
+
+#| Arch Quark dependancies
+##########=#=#=#=#=#==========
+qterm = { name="qterm", version="a.1.0" }
+
+#| Project Dependancies
+##########=#=#=#=#=#==========
+qmalib = { name="QMaLib", version="a.2.0" }

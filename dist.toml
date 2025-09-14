@@ -1,0 +1,18 @@
+# ideally no touchy this stuff
+#----------------------------------
+[core_versioning]
+release = "α" # α, β, δ
+version = "1.0" # major . minor
+
+# everything *below* here is up to you for customization, ideally follow some basic standards.
+# IMPORTANTLY: major updates = code breaking, minor updates = non-code breaking.
+# and: 'α' = unstable branch of 'β', 'β' = experimental branch of 'δ', 'δ' = fully stable, finished branch.
+#-----------------------------------------------------------------------------------------------
+
+[dist_versioning]
+release = "α" # α, β, δ
+version = "1.0" # major . minor
+
+[dist_identity]
+name = "\u001b[38;2;150;60;200mA\u001b[38;2;142;60;196mr\u001b[38;2;134;60;192mc\u001b[38;2;126;60;188mh\u001b[38;2;118;60;184m \u001b[38;2;111;60;180mQ\u001b[38;2;103;60;176mu\u001b[38;2;95;60;172ma\u001b[38;2;87;60;168mr\u001b[38;2;80;60;165mk\u001b[0m"
+author = "AmDeth/Амдец"
